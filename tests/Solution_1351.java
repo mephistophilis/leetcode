@@ -5,6 +5,8 @@ package tests;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import tests.common.TestHelper;
+
 class Solution_1351 {
     public int countNegatives(int[][] grid) {
         if (grid == null || grid.length == 0) {

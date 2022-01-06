@@ -1,15 +1,18 @@
-package tests;
+package tests.common;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-class TestHelper {
+public class TestHelper {
     public static <E> boolean compareList(List<E> result, List<E> expected) {
         return result.equals(expected);
     }
 
     public static int[] arrayStringToIntArray(String stringArray) {
+        if (stringArray.length() <= 2) {
+            return null;
+        }
         int[] intArray = Arrays.stream(stringArray.substring(1, stringArray.length() - 1).split(","))
                 .map(String::trim).mapToInt(Integer::parseInt).toArray();
         return intArray;
@@ -27,5 +30,41 @@ class TestHelper {
                 .boxed()
                 .collect(Collectors.toList());
         return list;
+    }
+
+    public static ListNode arrayStringToListNode(String stringArray) {
+        return intArrayToListNode(arrayStringToIntArray(stringArray));
+    }
+
+    public static ListNode intArrayToListNode(int arr[]) {
+        if (arr == null || arr.length == 0) {
+            return null;
+        }
+
+        ListNode curNode = new ListNode(0);
+        ListNode dummyNode = curNode;
+
+        for (int val : arr) {
+            curNode.next = new ListNode(val);
+            curNode = curNode.next;
+        }
+
+        return dummyNode.next;
+    }
+
+    public static boolean compareListNode(ListNode n1, ListNode n2) {
+        while (n1 != null && n2 != null) {
+            if (n1.val != n2.val) {
+                return false;
+            } else {
+                n1 = n1.next;
+                n2 = n2.next;
+            }
+        }
+        if (n1 == null && n2 == null) {
+            return true;
+        }
+
+        return false;
     }
 }

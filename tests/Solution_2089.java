@@ -9,6 +9,8 @@ import java.util.List;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import tests.common.TestHelper;
+
 class Solution_2089 {
     public List<Integer> targetIndices(int[] nums, int target) {
         if (nums == null || nums.length == 0) {

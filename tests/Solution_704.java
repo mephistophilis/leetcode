@@ -5,6 +5,8 @@ package tests;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import tests.common.TestHelper;
+
 class Solution_704 {
     public int search(int[] nums, int target) {
         if(nums == null || nums.length == 0) {
