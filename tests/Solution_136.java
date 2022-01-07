@@ -6,7 +6,6 @@ package tests;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import tests.common.ListNode;
 import tests.common.TestHelper;
 
 class Solution_136 {
