@@ -20,7 +20,7 @@ class Solution_74 {
     }
 
     boolean binarySearch(int[] nums, int target) {
-        if (nums == null && nums.length == 0) {
+        if (nums == null || nums.length == 0) {
             return false;
         }
 
