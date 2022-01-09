@@ -1,5 +1,6 @@
 package tests.common;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -19,6 +20,9 @@ public class TestHelper {
     }
 
     public static int[][] arrayStringTo2DIntArray(String stringArray) {
+        if (stringArray.length() <= 4) {
+            return null;
+        }
         return Arrays.stream(stringArray.substring(2, stringArray.length() - 2).split("\\],\\["))
                 .map(e -> Arrays.stream(e.split("\\s*,\\s*")).map(String::trim).map(Integer::parseInt).mapToInt(i -> i)
                         .toArray())
@@ -30,6 +34,26 @@ public class TestHelper {
                 .boxed()
                 .collect(Collectors.toList());
         return list;
+    }
+
+    public static List<List<Integer>> array2DStringToIntList(String stringArray) {
+        int[][] arrs = arrayStringTo2DIntArray(stringArray);
+
+        if(arrs == null) {
+            return new ArrayList<List<Integer>>();
+        }
+
+        List<List<Integer>> lists = new ArrayList<List<Integer>>();
+
+        for (int[] arr : arrs) {
+            List<Integer> list = Arrays.stream(arr)
+                    .boxed()
+                    .collect(Collectors.toList());
+
+            lists.add(list);
+        }
+
+        return lists;
     }
 
     public static ListNode arrayStringToListNode(String stringArray) {
