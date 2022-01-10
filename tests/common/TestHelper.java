@@ -21,7 +21,7 @@ public class TestHelper {
 
     public static int[][] arrayStringTo2DIntArray(String stringArray) {
         if (stringArray.length() <= 4) {
-            return null;
+            return new int[0][0];
         }
         return Arrays.stream(stringArray.substring(2, stringArray.length() - 2).split("\\],\\["))
                 .map(e -> Arrays.stream(e.split("\\s*,\\s*")).map(String::trim).map(Integer::parseInt).mapToInt(i -> i)
