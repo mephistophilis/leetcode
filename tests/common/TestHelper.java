@@ -29,6 +29,30 @@ public class TestHelper {
                 .toArray(int[][]::new);
     }
 
+    public static char[][] arrayStringTo2DCharArray(String stringArray) {
+        if (stringArray.length() <= 4) {
+            return new char[0][0];
+        }
+
+        Character[][] characters = Arrays.stream(stringArray.substring(2, stringArray.length() - 2)
+                .split("\\],\\["))
+                .map(e -> Arrays.stream(e.split("\\s*,\\s*"))
+                        .map(String::trim)
+                        .map(s -> s.charAt(1))
+                        .toArray(Character[]::new))
+                .toArray(Character[][]::new);
+
+        char[][] ret = new char[characters.length][characters[0].length]; 
+        
+        for(int r =0; r< characters.length; r++) {
+            for(int c =0; c< characters[0].length; c++) {
+                ret[r][c] = characters[r][c];
+            }   
+        }
+
+        return ret;
+    }
+
     public static List<Integer> arrayStringToIntList(String stringArray) {
         List<Integer> list = Arrays.stream(arrayStringToIntArray(stringArray))
                 .boxed()
@@ -39,7 +63,7 @@ public class TestHelper {
     public static List<List<Integer>> array2DStringToIntList(String stringArray) {
         int[][] arrs = arrayStringTo2DIntArray(stringArray);
 
-        if(arrs == null) {
+        if (arrs == null) {
             return new ArrayList<List<Integer>>();
         }
 
