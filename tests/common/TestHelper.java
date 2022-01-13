@@ -10,9 +10,106 @@ public class TestHelper {
         return result.equals(expected);
     }
 
-    public static int[] arrayStringToIntArray(String stringArray) {
-        if (stringArray.length() <= 2) {
+    public static Node arrayStringToNode(String stringArray) {
+
+        Integer arr[] = arrayStringToIntegerArray(stringArray);
+
+        if (arr.length == 0) {
             return null;
+        }
+
+        return arrayToNode(arr, 0);
+    }
+
+    public static boolean isSameNode(Node s, Node t) {
+        if (s == null && t == null)
+            return true;
+        if (s == null || t == null)
+            return false;
+
+        if (s.val != t.val)
+            return false;
+
+        if (s.next != null && t.next == null) {
+            return false;
+        }
+
+        if (s.next == null && t.next != null) {
+            return false;
+        }
+
+        if (s.next != null && t.next != null) {
+            if (s.next.val != t.next.val)
+                return false;
+        }
+
+        return isSameNode(s.left, t.left) && isSameNode(s.right, t.right);
+    }
+
+    public static boolean isSameTreeNode(TreeNode s, TreeNode t) {
+        if (s == null && t == null)
+            return true;
+        if (s == null || t == null)
+            return false;
+
+        if (s.val != t.val)
+            return false;
+
+        return isSameTreeNode(s.left, t.left) && isSameTreeNode(s.right, t.right);
+    }
+
+    public static TreeNode arrayStringToTreeNode(String stringArray) {
+        int arr[] = arrayStringToIntArray(stringArray);
+
+        if (arr.length == 0) {
+            return null;
+        }
+
+        return arrayToTreeNode(arr, 0);
+    }
+
+    static TreeNode arrayToTreeNode(int[] array, int index) {
+        return index < array.length
+                ? new TreeNode(array[index], arrayToTreeNode(array, index * 2 + 1),
+                        arrayToTreeNode(array, index * 2 + 2))
+                : null;
+    }
+
+    static Node arrayToNode(Integer[] array, int index) {
+
+        if (index < array.length) {
+            if (array[index] == null) {
+                return null;
+            }
+
+            return new Node(array[index], arrayToNode(array, index * 2 + 1), arrayToNode(array, index * 2 + 2), null);
+        }
+
+        return null;
+    }
+
+    public static Integer[] arrayStringToIntegerArray(String stringArray) {
+        String[] items = stringArray.replaceAll("\\[", "").replaceAll("\\]",
+                "").replaceAll("\\s", "").split(",");
+
+        Integer[] results = new Integer[items.length];
+
+        for (int i = 0; i < items.length; i++) {
+            try {
+                results[i] = Integer.parseInt(items[i]);
+            } catch (NumberFormatException nfe) {
+                if (items[i] == "null" || items[i] == "#") {
+                    results[i] = null;
+                }
+            }
+        }
+        return results;
+    }
+
+    public static int[] arrayStringToIntArray(String stringArray) {
+
+        if (stringArray.length() <= 2) {
+            return new int[0];
         }
         int[] intArray = Arrays.stream(stringArray.substring(1, stringArray.length() - 1).split(","))
                 .map(String::trim).mapToInt(Integer::parseInt).toArray();
@@ -42,12 +139,12 @@ public class TestHelper {
                         .toArray(Character[]::new))
                 .toArray(Character[][]::new);
 
-        char[][] ret = new char[characters.length][characters[0].length]; 
-        
-        for(int r =0; r< characters.length; r++) {
-            for(int c =0; c< characters[0].length; c++) {
+        char[][] ret = new char[characters.length][characters[0].length];
+
+        for (int r = 0; r < characters.length; r++) {
+            for (int c = 0; c < characters[0].length; c++) {
                 ret[r][c] = characters[r][c];
-            }   
+            }
         }
 
         return ret;
