@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 
 import tests.common.TestHelper;
 
-class Solution_78 {
+class Solution_90 {
 
     public List<List<Integer>> subsetsWithDup(int[] nums) {
         List<List<Integer>> result = new ArrayList<>();
