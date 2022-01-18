@@ -2,6 +2,7 @@ package tests.common;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -102,6 +103,18 @@ public class TestHelper {
                     results[i] = null;
                 }
             }
+        }
+        return results;
+    }
+
+    public static List<String> arrayStringToStringList(String stringArray) {
+        String[] items = stringArray.replaceAll("\\[", "").replaceAll("\\]",
+                "").replaceAll("\\s", "").split(",");
+
+        List<String> results = new LinkedList<>();
+
+        for (int i = 0; i < items.length; i++) {
+            results.add(items[i].replaceAll("^\"|\"$", ""));
         }
         return results;
     }
