@@ -9,22 +9,17 @@ import org.junit.jupiter.api.Test;
 class Solution_201 {
 
   public int rangeBitwiseAnd(int left, int right) {
-    if(left == 0){
+    if (left == 0) {
       return 0;
-  }
-  int moveFactor = 1;
-  while(left != right){
+    }
+    int moveFactor = 1;
+    while (left != right) {
       left >>= 1;
       right >>= 1;
       moveFactor <<= 1;
+    }
+    return left * moveFactor;
   }
-  return left * moveFactor;
-  }
-
-  //0000000000000101 
-  //0000000000000110
-  //0000000000000111
-
 
   @Test
   void test() {
